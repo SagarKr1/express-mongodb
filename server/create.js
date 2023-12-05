@@ -8,10 +8,10 @@ router.post("/post",async (req,res)=>{
     let data = req.body;
     let con = await db.handler();
     let collection = con.collection('book');
-    // let id =await "id" + Math.floor(Math.random() * (999999999 - 100000000 + 1) + 100000000);
+    let id =await "id" + Math.floor(Math.random() * (999999999 - 100000000 + 1) + 100000000);
     if(data['title']!="" && data['publisher']!="" && data['author'].length!=0){
         let object = {
-            // "id":id,
+            "id":id,
             "title":data['title'],
             "author":data['author'],
             "publisher":data['publisher'],
