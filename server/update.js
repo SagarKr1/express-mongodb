@@ -9,12 +9,21 @@ router.put("/put", async (req, res) => {
     if (data['title'] != "" && data['publisher'] != "" && data['author'].length != 0 && data['id'] != "") {
         let con = await db.handler();
         let collection = con.collection('book');
-        let findData = await collection.findOne({ "id":data['id'] });
+        let findData = await collection.findOne({ "id": data['id'] });
         console.log(findData);
-        if(findData!=null){
-            
-            return res.status(200).send(findData);
-        }else{
+        if (findData != null) {
+            let newData = {
+                $set: {
+                    "title": data['title'],
+                    "author": data['author'],
+                    "publisher": data['publisher'],
+                    "description": data['description']
+                }
+            }
+            console.log(newData);
+            await collection.updateOne({ "id": data['id'] },newData);
+            return res.status(200).send("update successfully");
+        } else {
             return res.status(404).send("Data not found");
         }
     } else {
