@@ -12,8 +12,10 @@ router.delete("/delete",async (req,res)=>{
         console.log(findData);
         if (findData != null) {
             await collection.deleteOne({ "id": data['id'] });
+            await db.close();
             return res.status(200).send("Data deleted successfully");
         }else{
+            await db.close();
             return res.status(404).send("Data not found");
         }
 })

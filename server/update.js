@@ -22,8 +22,10 @@ router.put("/put", async (req, res) => {
             }
             console.log(newData);
             await collection.updateOne({ "id": data['id'] },newData);
+            await db.close();
             return res.status(200).send("update successfully");
         } else {
+            await db.close();
             return res.status(404).send("Data not found");
         }
     } else {

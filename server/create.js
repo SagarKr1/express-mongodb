@@ -22,10 +22,10 @@ router.post("/post",async (req,res)=>{
         let inst = await collection.insertOne(object);
         console.log(inst);
         await db.close();
-        res.status(200).send("data inserted successfully");
+        return res.status(200).send("data inserted successfully");
     }else{
         await db.close();
-        res.status(404).send("Something went wrong");
+        return res.status(404).send("Something went wrong");
     }
 
 })
